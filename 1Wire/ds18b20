@@ -1,0 +1,15 @@
+Connected to pin 11 P8
+2 sensors DG18B20 with 10 k Pull Up resistor
+
+Shows DT Solts 
+cat  /sys/devices/platform/bone_capemgr/slots
+
+Enable Device Tree Slot
+echo DS1820 > /sys/devices/platform/bone_capemgr/slots
+
+Disable Device Tree Slot
+echo -XX > /sys/devices/platform/bone_capemgr/slots
+where XX is the slot number 
+
+To access sensor value 
+cat  /sys/devices/w1_bus_master1/28-00000856826a/w1_slave 
