@@ -1,0 +1,12 @@
+For pins 
+  24 CAN_Rx
+  26 CAN_Tx
+dtc -O dtb -o /lib/firmware/BB-DCAN1-00A0.dtbo -b 0 -@ BB-DCAN1-00A0.dts
+Canutils
+https://github.com/linux-can/can-utils
+clone and make
+ifconfig can0 down
+ip link set can0 up type can bitrate 500000 loopback off
+ifconfig can0 up
+cansend can0 5AA#deadbeef
+candump can0
