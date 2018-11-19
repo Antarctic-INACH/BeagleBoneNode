@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo DS1820     > /sys/devices/platform/bone_capemgr/slots
+echo BB-DCAN1    > /sys/devices/platform/bone_capemgr/slots
+echo BB-UART2   > /sys/devices/platform/bone_capemgr/slots
+
