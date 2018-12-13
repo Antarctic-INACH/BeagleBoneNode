@@ -28,9 +28,9 @@ function canread(port)
 	close(sock);
     catch err
 		println(log,:info,"$hostname CAN socket error $err");
-        close(sock);
         return -1;
+    finally 
+    	return pdata;
     end
- return pdata;
 end
 ###############################################################################

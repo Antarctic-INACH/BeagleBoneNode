@@ -7,6 +7,7 @@
 ###############################################################################
 using Sockets;
 using Syslogs;
+using JuliaDB;
 #using Dates;
 #using SQLite;
 #using JuliaDB;
@@ -18,6 +19,13 @@ hostname = "BB-2";
 port = 2037;
 # log handler
 global log = Syslog();
+
+###############################################################################
+# databases
+# main database framework
+# db = table([], [], names=[:PlantTemp, :AirTemp]);
+###############################################################################
+
 
 
 ###############################################################################
@@ -40,10 +48,15 @@ include("DS18B20read.jl");
 					elseif line == "takemeasure\n"
 				        write(sock, "$hostname Taking Measurement\n");
 		            elseif line ==  "SendSMS\n"
-					    write(sock, "$hostname Sending Message\n");	
+					    write(sock, "$hostname Sending Message\n");			
 		            elseif line ==  "ReadMLX\n"
+                        write(sock, "$hostname About to ReadMLX\n");
                         temperature = MLXread(1,0x5a);  
                         air = DS18B20read();
+                        db = load("dump.db");
+                        umeas = table([temperature], [air], names=[:PlantTemp, :AirTemp]);
+                        db = merge(db,umeas);
+                        save(db, "dump.db");
 					    write(sock, "$hostname Temperature Value = $temperature, Air Temperature = $air\n");		                 
 					elseif line == "close\n"                             
 					    write(sock, "Close and Exit Task\n");
