@@ -10,7 +10,6 @@ using Syslogs;
 using JuliaDB;
 #using Dates;
 #using SQLite;
-#using JuliaDB;
 ###############################################################################
 
 # hostname definition
@@ -19,13 +18,6 @@ hostname = "BB-2";
 port = 2037;
 # log handler
 global log = Syslog();
-
-###############################################################################
-# databases
-# main database framework
-# db = table([], [], names=[:PlantTemp, :AirTemp]);
-###############################################################################
-
 
 
 ###############################################################################
